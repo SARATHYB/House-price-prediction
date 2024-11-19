@@ -1,0 +1,1 @@
+This project is a web-based application that predicts housing prices using a Random Forest Regressor model. It allows users to input housing features and get the estimated price. The predictions are stored in a MySQL database, with audit logs maintained using triggers for insert, update, and delete operations.
