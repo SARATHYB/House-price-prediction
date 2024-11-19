@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Price Predictor</title>
+    <!-- Adding Bootstrap for styling -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body>
+
+    <h1>House Price Predictor</h1>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="alert alert-info">
+        <ul>
+            {% for category, message in messages %}
+            <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    {% endwith %}
+
+    <!-- Prediction Form -->
+    <form method="POST">
+        <div class="form-group">
+            <label for="rooms">Number of Rooms:</label>
+            <input type="text" name="rooms" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="bathroom">Number of Bathrooms:</label>
+            <input type="text" name="bathroom" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="landsize">Landsize (sqm):</label>
+            <input type="text" name="landsize" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="latitude">Latitude:</label>
+            <input type="text" name="latitude" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="longitude">Longitude:</label>
+            <input type="text" name="longitude" class="form-control" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Predict Price</button>
+    </form>
+
+    <!-- Predictions Link -->
+    <div class="predictions">
+        <a href="{{ url_for('predictions') }}">View Predictions</a>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
