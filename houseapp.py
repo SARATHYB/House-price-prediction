@@ -5,6 +5,8 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split,GridSearchCV
 from sklearn.metrics import mean_squared_error, mean_absolute_error,r2_score
 from sklearn.preprocessing import StandardScaler
+import matplotlib.pyplot as plt
+import numpy as np
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'  
@@ -103,6 +105,22 @@ def predictions():
     conn.close()
     
     return render_template('predictions.html', predictions=results)
+
+
+plt.figure(figsize=(10, 6))
+plt.scatter(y_test, y_pred_rf, color='blue', alpha=0.6, label='Predicted vs Actual')
+plt.plot([min(y_test), max(y_test)], [min(y_test), max(y_test)], color='red', linestyle='--', linewidth=2, label='Perfect Prediction')
+
+# Plot enhancements
+plt.title('Actual vs. Predicted Prices (Random Forest)', fontsize=16)
+plt.xlabel('Actual Prices', fontsize=14)
+plt.ylabel('Predicted Prices', fontsize=14)
+plt.legend(fontsize=12)
+plt.grid(alpha=0.4)
+plt.tight_layout()
+
+# Display the plot
+plt.show()
 
 if __name__ == '__main__':
     app.run(debug=True)
